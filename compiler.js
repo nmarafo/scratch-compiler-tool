@@ -95,16 +95,23 @@ class ScratchCompiler {
 
         switch (action.type) {
             case 'move':
-                block.opcode = "motion_movesteps";
-                block.inputs.STEPS = [1, [4, action.steps.toString()]];
+                if (action.x !== undefined || action.y !== undefined) {
+                    block.opcode = "motion_gotoxy";
+                    block.inputs.X = [1, [4, (action.x || 0).toString()]];
+                    block.inputs.Y = [1, [4, (action.y || 0).toString()]];
+                } else {
+                    block.opcode = "motion_movesteps";
+                    block.inputs.STEPS = [1, [4, (action.steps || 10).toString()]];
+                }
                 break;
             case 'say':
                 block.opcode = "look_say";
-                block.inputs.MESSAGE = [1, [10, action.text]];
+                block.inputs.MESSAGE = [1, [10, (action.text || "").toString()]];
                 break;
             case 'wait':
                 block.opcode = "control_wait";
-                block.inputs.DURATION = [1, [5, action.seconds.toString()]];
+                const dur = action.seconds || action.duration || 1;
+                block.inputs.DURATION = [1, [5, dur.toString()]];
                 break;
             case 'start':
                 block.opcode = "event_whenflagclicked";
@@ -202,22 +209,29 @@ class ScratchCompiler {
 
             // Handle Costumes (Internal or External)
             if (inputJson.costumes && Array.isArray(inputJson.costumes)) {
-                for (const cost of inputJson.costumes) {
+                for (let cost of inputJson.costumes) {
                     let blob = null;
                     let fileName = "";
                     let assetId = "";
+                    let costumeName = "";
 
-                    if (cost.url) {
-                        blob = await this.fetchExternalAsset(cost.url);
-                        assetId = generateId(); // Use random ID for external
-                        const ext = cost.url.split('.').pop().split('?')[0] || 'png';
-                        fileName = `${assetId}.${ext}`;
+                    // Support both string ["name"] and object [{name, url}]
+                    if (typeof cost === 'string') {
+                        costumeName = cost;
+                    } else {
+                        costumeName = cost.name || "costume";
+                        if (cost.url) {
+                            blob = await this.fetchExternalAsset(cost.url);
+                            assetId = generateId();
+                            const ext = cost.url.split('.').pop().split('?')[0] || 'png';
+                            fileName = `${assetId}.${ext}`;
+                        }
                     }
 
                     if (blob) {
                         this.zip.file(fileName, blob);
                         sprite.costumes.push({
-                            name: cost.name || "costume",
+                            name: costumeName,
                             bitmapResolution: 1,
                             dataFormat: fileName.split('.').pop(),
                             assetId: assetId,
@@ -225,6 +239,22 @@ class ScratchCompiler {
                             rotationCenterX: 50,
                             rotationCenterY: 50
                         });
+                    } else if (typeof cost === 'string' || (cost && !cost.url)) {
+                        // Use default asset if no URL or just a name
+                        const defaultId = "bcf454acf82e4504149f7ffe07081dbc";
+                        const defaultBlob = await this.fetchAsset(`${defaultId}.svg`);
+                        if (defaultBlob) {
+                            this.zip.file(`${defaultId}.svg`, defaultBlob);
+                            sprite.costumes.push({
+                                name: costumeName,
+                                bitmapResolution: 1,
+                                dataFormat: "svg",
+                                assetId: defaultId,
+                                md5ext: `${defaultId}.svg`,
+                                rotationCenterX: 48,
+                                rotationCenterY: 50
+                            });
+                        }
                     }
                 }
             }
