@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scratch Compiler Tool | by nmarafo</title>
+    <meta name="description" content="Compilador de proyectos Scratch a partir de estructuras JSON de investigación.">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="background-blur"></div>
+    
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">
+                    <i data-lucide="blocks" color="white" size="24"></i>
+                </div>
+                <span>Scratch Compiler Tool</span>
+            </div>
+            <div class="header-actions">
+                <button class="btn-secondary" id="load-example">
+                    <i data-lucide="file-json" size="18"></i>
+                    Cargar Ejemplo
+                </button>
+            </div>
+        </header>
+
+        <main class="main-layout">
+            <section class="editor-section">
+                <div class="section-header">
+                    <div class="section-title">
+                        <i data-lucide="code-2" size="16"></i>
+                        NotebookLM JSON
+                    </div>
+                </div>
+                <textarea id="json-input" placeholder='Pega aquí tu JSON generado por NotebookLM...'></textarea>
+            </section>
+
+            <section class="output-section">
+                <div class="section-header">
+                    <div class="section-title">
+                        <i data-lucide="terminal" size="16"></i>
+                        Consola de Compilación
+                    </div>
+                </div>
+                <div class="output-console" id="console">
+                    <div class="console-line info">> Listo para compilar.</div>
+                </div>
+                <div class="action-bar">
+                    <button class="btn-primary" id="compile-btn">
+                        <i data-lucide="cpu" size="18"></i>
+                        Compilar .sb3
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="compiler.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>

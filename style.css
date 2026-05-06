@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap');
+
+:root {
+    --primary: #8553f4;
+    --primary-glow: rgba(133, 83, 244, 0.3);
+    --secondary: #2dce89;
+    --dark: #0f172a;
+    --darker: #020617;
+    --light: #f8fafc;
+    --gray: #64748b;
+    --glass: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--darker);
+    color: var(--light);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.background-blur {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: radial-gradient(circle at 20% 30%, var(--primary-glow) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(45, 206, 137, 0.1) 0%, transparent 40%);
+}
+
+.app-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.logo {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #fff 0%, #8553f4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--primary);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 20px var(--primary-glow);
+}
+
+.main-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    height: calc(100vh - 200px);
+}
+
+.editor-section, .output-section {
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.editor-section:hover, .output-section:hover {
+    border-color: rgba(133, 83, 244, 0.4);
+}
+
+.section-header {
+    padding: 1.25rem 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid var(--glass-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.section-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--gray);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#json-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 1.5rem;
+    color: #e2e8f0;
+    font-family: 'Fira Code', 'Courier New', monospace;
+    font-size: 14px;
+    resize: none;
+    outline: none;
+    line-height: 1.6;
+}
+
+.output-console {
+    flex: 1;
+    padding: 1.5rem;
+    font-family: 'Fira Code', monospace;
+    font-size: 13px;
+    color: #94a3b8;
+    overflow-y: auto;
+}
+
+.console-line {
+    margin-bottom: 0.5rem;
+}
+
+.console-line.info { color: #60a5fa; }
+.console-line.success { color: #4ade80; }
+.console-line.error { color: #f87171; }
+
+.action-bar {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 15px var(--primary-glow);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--primary-glow);
+    filter: brightness(1.1);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    border: 1px solid var(--glass-border);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.8; }
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
