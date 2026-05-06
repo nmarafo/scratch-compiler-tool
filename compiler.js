@@ -322,3 +322,28 @@ document.getElementById('load-example').addEventListener('click', () => {
     document.getElementById('json-input').value = JSON.stringify(example, null, 2);
     Console.log("Ejemplo con imagen externa cargado.");
 });
+
+// Modal Logic
+const modal = document.getElementById('guide-modal');
+const openBtn = document.getElementById('open-guide');
+const closeBtn = document.getElementById('close-guide');
+
+openBtn.onclick = () => modal.style.display = 'flex';
+closeBtn.onclick = () => modal.style.display = 'none';
+window.onclick = (e) => { if (e.target == modal) modal.style.display = 'none'; };
+
+function copyPrompt() {
+    const text = document.getElementById('prompt-text').textContent.trim();
+    navigator.clipboard.writeText(text);
+    Console.log("Prompt copiado al portapapeles.", "success");
+    
+    const copyBtn = document.querySelector('.btn-copy');
+    const originalText = copyBtn.innerHTML;
+    copyBtn.innerHTML = '<i data-lucide="check" size="14"></i> Copiado';
+    lucide.createIcons();
+    setTimeout(() => {
+        copyBtn.innerHTML = originalText;
+        lucide.createIcons();
+    }, 2000);
+}
+window.copyPrompt = copyPrompt;

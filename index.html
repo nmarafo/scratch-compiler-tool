@@ -21,6 +21,10 @@
                 <span>Scratch Compiler Tool</span>
             </div>
             <div class="header-actions">
+                <button class="btn-secondary" id="open-guide">
+                    <i data-lucide="book-open" size="18"></i>
+                    Guía NotebookLM
+                </button>
                 <button class="btn-secondary" id="load-example">
                     <i data-lucide="file-json" size="18"></i>
                     Cargar Ejemplo
@@ -57,6 +61,52 @@
                 </div>
             </section>
         </main>
+    </div>
+
+    <!-- Modal Guía -->
+    <div id="guide-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="section-title">
+                    <i data-lucide="info" size="18"></i>
+                    Instrucciones para NotebookLM
+                </div>
+                <button class="close-btn" id="close-guide">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="guide-section">
+                    <h3>1. Configuración del Chat</h3>
+                    <p>Configura a NotebookLM como un <strong>Experto en Diseño Tecno-Pedagógico y Programación en Scratch</strong>. Pídele que se centre en crear experiencias educativas interactivas basadas en investigaciones profundas.</p>
+                </div>
+                <hr>
+                <div class="guide-section">
+                    <h3>2. Prompt para Deep Research</h3>
+                    <p>Usa el siguiente prompt después de subir tus fuentes de información:</p>
+                    <div class="code-block">
+                        <pre id="prompt-text">
+"Realiza una investigación profunda sobre [TU TEMA] y genera un esquema JSON para Scratch Compiler Tool. 
+REGLAS ESTRICTAS:
+1. El JSON debe tener este formato:
+{
+  "name": "Título del proyecto",
+  "costumes": [ { "name": "Nombre", "url": "URL_IMAGEN" } ],
+  "actions": [
+    { "type": "start" },
+    { "type": "say", "text": "Contenido educativo..." },
+    { "type": "wait", "seconds": 2 },
+    { "type": "move", "steps": 50 }
+  ]
+}
+2. Usa solo tipos: 'start', 'say', 'wait', 'move'.
+3. Las URLs deben ser directas de sitios públicos como Wikimedia."
+                        </pre>
+                        <button class="btn-copy" onclick="copyPrompt()">
+                            <i data-lucide="copy" size="14"></i> Copiar Prompt
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="compiler.js"></script>
