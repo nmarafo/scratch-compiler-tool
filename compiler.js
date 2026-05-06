@@ -332,6 +332,11 @@ openBtn.onclick = () => modal.style.display = 'flex';
 closeBtn.onclick = () => modal.style.display = 'none';
 window.onclick = (e) => { if (e.target == modal) modal.style.display = 'none'; };
 
+// Quick Copy Master Prompt
+document.getElementById('copy-master-quick').onclick = function() {
+    copyText('master-prompt-text', this);
+};
+
 function copyText(elementId, btn) {
     const text = document.getElementById(elementId).textContent.trim();
     navigator.clipboard.writeText(text);
