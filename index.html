@@ -91,14 +91,17 @@
                     Instrucciones para NotebookLM
                 </div>
                 <button class="close-btn" id="close-guide">&times;</button>
-            </div>
             <div class="modal-body">
                 <div class="guide-section">
-                    <h3>1. Configuración del Chat (Master Prompt)</h3>
-                    <p>Copia este prompt para definir el comportamiento de NotebookLM:</p>
+                    <h3>1. Generación de JSON (Master Prompt)</h3>
+                    <p>Copia este prompt una vez que NotebookLM haya completado la estructura de investigación:</p>
                     <div class="code-block">
                         <pre id="master-prompt-text">
-"Actúa como un Experto en Diseño Tecno-Pedagógico y Programación en Scratch. Tu objetivo es ayudarme a transformar investigaciones profundas en proyectos educativos interactivos. IMPORTANTE: Cuando trabajemos en el contenido, primero haremos una estructura narrativa y luego generaremos el código JSON."
+"Basándote en la estructura anterior, genera el JSON para el Scratch Compiler Tool. 
+REGLAS: 
+1. Usa el formato: { "name": "...", "costumes": [...], "actions": [...] }
+2. Crea una narrativa EXTENSA con al menos 20 acciones de tipo 'say', 'wait' y 'move'.
+3. Devuelve ÚNICAMENTE el código JSON crudo."
                         </pre>
                         <button class="btn-copy" onclick="copyText('master-prompt-text', this)">
                             <i data-lucide="copy" size="14"></i> Copiar Master Prompt
@@ -120,23 +123,6 @@ Identifica:
                         </pre>
                         <button class="btn-copy" onclick="copyText('research-prompt-text', this)">
                             <i data-lucide="copy" size="14"></i> Copiar Prompt Fase 1
-                        </button>
-                    </div>
-                </div>
-                <hr>
-                <div class="guide-section">
-                    <h3>3. Fase 2: Generación de JSON</h3>
-                    <p>Una vez tengas el informe, usa este prompt para obtener el código final:</p>
-                    <div class="code-block">
-                        <pre id="json-prompt-text">
-"Basándote en la estructura anterior, genera el JSON para el Scratch Compiler Tool. 
-REGLAS: 
-1. Usa el formato: { "name": "...", "costumes": [...], "actions": [...] }
-2. Crea una narrativa EXTENSA con al menos 20 acciones de tipo 'say', 'wait' y 'move'.
-3. Devuelve ÚNICAMENTE el código JSON crudo."
-                        </pre>
-                        <button class="btn-copy" onclick="copyText('json-prompt-text', this)">
-                            <i data-lucide="copy" size="14"></i> Copiar Prompt Fase 2
                         </button>
                     </div>
                 </div>
