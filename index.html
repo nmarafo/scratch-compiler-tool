@@ -90,33 +90,41 @@
             </div>
             <div class="modal-body">
                 <div class="guide-section">
-                    <h3>1. Configuración del Chat</h3>
-                    <p>Configura a NotebookLM como un <strong>Experto en Diseño Tecno-Pedagógico y Programación en Scratch</strong>. Pídele que se centre en crear experiencias educativas interactivas basadas en investigaciones profundas.</p>
+                    <h3>1. Configuración del Chat (Master Prompt)</h3>
+                    <p>Copia este prompt en los ajustes del chat o como primera instrucción para definir el comportamiento de NotebookLM:</p>
+                    <div class="code-block">
+                        <pre id="master-prompt-text">
+"Actúa como un Experto en Diseño Tecno-Pedagógico y Programación en Scratch. Tu objetivo es ayudarme a transformar investigaciones profundas en proyectos educativos interactivos de Scratch. Cuando te pida generar un JSON para el 'Scratch Compiler Tool', deberás seguir estrictamente el esquema técnico proporcionado, utilizando los hitos, personajes y datos históricos encontrados en mis fuentes. Prioriza la precisión histórica y la claridad pedagógica en los textos de los bloques 'say'."
+                        </pre>
+                        <button class="btn-copy" onclick="copyText('master-prompt-text', this)">
+                            <i data-lucide="copy" size="14"></i> Copiar Master Prompt
+                        </button>
+                    </div>
                 </div>
                 <hr>
                 <div class="guide-section">
                     <h3>2. Prompt para Deep Research</h3>
-                    <p>Usa el siguiente prompt después de subir tus fuentes de información:</p>
+                    <p>Usa el siguiente prompt después de subir tus fuentes de información para generar el código:</p>
                     <div class="code-block">
-                        <pre id="prompt-text">
-"Realiza una investigación profunda sobre [TU TEMA] y genera un esquema JSON para Scratch Compiler Tool. 
+                        <pre id="research-prompt-text">
+"Realiza una investigación profunda sobre el tema de mis fuentes y genera un esquema JSON para Scratch Compiler Tool. 
 REGLAS ESTRICTAS:
 1. El JSON debe tener este formato:
 {
-  "name": "Título del proyecto",
+  "name": "Título",
   "costumes": [ { "name": "Nombre", "url": "URL_IMAGEN" } ],
   "actions": [
     { "type": "start" },
-    { "type": "say", "text": "Contenido educativo..." },
+    { "type": "say", "text": "Contenido..." },
     { "type": "wait", "seconds": 2 },
     { "type": "move", "steps": 50 }
   ]
 }
 2. Usa solo tipos: 'start', 'say', 'wait', 'move'.
-3. Las URLs deben ser directas de sitios públicos como Wikimedia."
+3. Busca URLs directas de imágenes en mis fuentes o en Wikimedia."
                         </pre>
-                        <button class="btn-copy" onclick="copyPrompt()">
-                            <i data-lucide="copy" size="14"></i> Copiar Prompt
+                        <button class="btn-copy" onclick="copyText('research-prompt-text', this)">
+                            <i data-lucide="copy" size="14"></i> Copiar Prompt Research
                         </button>
                     </div>
                 </div>

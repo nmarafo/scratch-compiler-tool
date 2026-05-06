@@ -332,18 +332,17 @@ openBtn.onclick = () => modal.style.display = 'flex';
 closeBtn.onclick = () => modal.style.display = 'none';
 window.onclick = (e) => { if (e.target == modal) modal.style.display = 'none'; };
 
-function copyPrompt() {
-    const text = document.getElementById('prompt-text').textContent.trim();
+function copyText(elementId, btn) {
+    const text = document.getElementById(elementId).textContent.trim();
     navigator.clipboard.writeText(text);
-    Console.log("Prompt copiado al portapapeles.", "success");
+    Console.log("Texto copiado al portapapeles.", "success");
     
-    const copyBtn = document.querySelector('.btn-copy');
-    const originalText = copyBtn.innerHTML;
-    copyBtn.innerHTML = '<i data-lucide="check" size="14"></i> Copiado';
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<i data-lucide="check" size="14"></i> Copiado';
     lucide.createIcons();
     setTimeout(() => {
-        copyBtn.innerHTML = originalText;
+        btn.innerHTML = originalText;
         lucide.createIcons();
     }, 2000);
 }
-window.copyPrompt = copyPrompt;
+window.copyText = copyText;
