@@ -94,7 +94,7 @@
                     <p>Copia este prompt en los ajustes del chat o como primera instrucción para definir el comportamiento de NotebookLM:</p>
                     <div class="code-block">
                         <pre id="master-prompt-text">
-"Actúa como un Experto en Diseño Tecno-Pedagógico y Programación en Scratch. Tu objetivo es ayudarme a transformar investigaciones profundas en proyectos educativos interactivos de Scratch. Cuando te pida generar un JSON para el 'Scratch Compiler Tool', deberás seguir estrictamente el esquema técnico proporcionado, utilizando los hitos, personajes y datos históricos encontrados en mis fuentes. Prioriza la precisión histórica y la claridad pedagógica en los textos de los bloques 'say'."
+"Actúa como un Experto en Diseño Tecno-Pedagógico y Programación en Scratch. Tu objetivo es ayudarme a transformar investigaciones profundas en proyectos educativos interactivos de Scratch. Cuando te pida generar un JSON para el 'Scratch Compiler Tool', deberás seguir estrictamente el esquema técnico proporcionado. IMPORTANTE: Devuelve ÚNICAMENTE el código JSON, sin introducciones, comentarios ni explicaciones adicionales."
                         </pre>
                         <button class="btn-copy" onclick="copyText('master-prompt-text', this)">
                             <i data-lucide="copy" size="14"></i> Copiar Master Prompt
@@ -121,7 +121,8 @@ REGLAS ESTRICTAS:
   ]
 }
 2. Usa solo tipos: 'start', 'say', 'wait', 'move'.
-3. Busca URLs directas de imágenes en mis fuentes o en Wikimedia."
+3. Busca URLs directas de imágenes en mis fuentes o en Wikimedia.
+4. Devuelve ÚNICAMENTE el código JSON crudo, sin bloques de texto adicionales."
                         </pre>
                         <button class="btn-copy" onclick="copyText('research-prompt-text', this)">
                             <i data-lucide="copy" size="14"></i> Copiar Prompt Research
