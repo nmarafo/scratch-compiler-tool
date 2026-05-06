@@ -49,7 +49,7 @@ const SCRATCH_TEMPLATE = {
     extensions: [],
     meta: {
         semver: "3.0.0",
-        vm: "0.2.0",
+        vm: "0.2.0-prerelease.20190102210314",
         agent: "Scratch Compiler Tool v1.0"
     }
 };
@@ -105,7 +105,7 @@ class ScratchCompiler {
                 }
                 break;
             case 'say':
-                block.opcode = "look_say";
+                block.opcode = "looks_say";
                 block.inputs.MESSAGE = [1, [10, (action.text || "").toString()]];
                 break;
             case 'wait':
